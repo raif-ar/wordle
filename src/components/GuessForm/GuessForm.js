@@ -5,7 +5,6 @@ function GuessForm({ addItemToList }) {
 
   function onSubmit(event) {
     event.preventDefault();
-    console.log({ guess: input });
     addItemToList(input);
     setInput("");
   }
@@ -14,10 +13,12 @@ function GuessForm({ addItemToList }) {
     <form className="guess-input-wrapper" onSubmit={onSubmit}>
       <label htmlFor="guess-input">Enter guess:</label>
       <input
+        required
         id="guess-input"
         type="text"
         value={input}
-        pattern="\w{5,5}"
+        pattern="[a-zA-Z]{5}"
+        title="5 letter word"
         onChange={(event) => setInput(event.target.value?.toUpperCase())}
       />
     </form>
