@@ -257,6 +257,13 @@ h1 {
   color: white;
 }
 
+.restart-btn {
+  background-color: #ffffff;
+  color: var(--color-gray-100);
+  padding: 8px;
+  border-radius: 4px;
+}
+
 /*
   Keyframe animations
 */

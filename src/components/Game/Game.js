@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
@@ -10,17 +10,23 @@ import ResultBanner from "../ResultBanner/ResultBanner";
 import Keyboard from "../Keyboard/Keyboard";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
-// Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
+const INITIAL_GAME_LIST = [];
+const INITIAL_GAME_RESULT = {
+  isCompleted: false,
+  isWin: false,
+};
 
 function Game() {
-  const [guessList, setGuessList] = React.useState([]);
-  const [gameResult, setGameResult] = React.useState({
-    isCompleted: false,
-    isWin: false,
+  const [answer, setAnswer] = React.useState(() => {
+    return sample(WORDS);
   });
+
+  useEffect(() => {
+    console.info({ answer });
+  }, [answer]);
+
+  const [guessList, setGuessList] = React.useState(INITIAL_GAME_LIST);
+  const [gameResult, setGameResult] = React.useState(INITIAL_GAME_RESULT);
 
   const uniqueLettersGuessed = React.useMemo(() => {
     const lettersGuessedDict = {};
@@ -58,6 +64,13 @@ function Game() {
     }
   }
 
+  function handleRestartGame() {
+    setGuessList(INITIAL_GAME_LIST);
+    setGameResult(INITIAL_GAME_RESULT);
+
+    setAnswer(sample(WORDS));
+  }
+
   return (
     <>
       {gameResult.isCompleted && (
@@ -65,6 +78,7 @@ function Game() {
           isWin={gameResult.isWin}
           answer={answer}
           numOfGuesses={guessList.length}
+          onRestartGame={handleRestartGame}
         />
       )}
       <GuessResult items={guessList} />
