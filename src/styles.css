@@ -218,6 +218,44 @@ h1 {
 .modal-title {
   margin-bottom: 0.5em;
 }
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+}
+.keyboard-item {
+  font-size: 1.25em;
+  font-weight: bold;
+  border: 0;
+  padding: 0;
+  margin: 0 6px 0 0;
+  height: 58px;
+  min-width: 43px;
+  border-radius: 4px;
+  cursor: default;
+  background-color: #d3d6da;
+  color: #000000;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.keyboard-item.correct {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: white;
+}
+.keyboard-item.incorrect {
+  background: var(--color-gray-300);
+  border-color: var(--color-gray-300);
+  color: white;
+}
+.keyboard-item.misplaced {
+  background: var(--color-warning);
+  border-color: var(--color-warning);
+  color: white;
+}
 
 /*
   Keyframe animations
